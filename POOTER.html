@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-    <meta name="theme-color" content="#A9D6E5">
     <title>POOTER - your daily wellness buddy</title>
     <style>
         * {
@@ -16,7 +15,6 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(145deg, #E8F8FF 0%, #FFE8F0 100%);
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         :root {
@@ -41,13 +39,19 @@
             align-items: center; justify-content: center; z-index: 2000;
             animation: fadeOut 0.8s ease-in-out 1.5s forwards;
         }
-        @keyframes fadeOut { 0% { opacity: 1; visibility: visible; } 100% { opacity: 0; visibility: hidden; } }
+        @keyframes fadeOut {
+            0% { opacity: 1; visibility: visible; }
+            100% { opacity: 0; visibility: hidden; }
+        }
         .splash-logo { animation: bounceScale 0.6s ease-out; }
-        @keyframes bounceScale { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes bounceScale {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
         .splash-logo svg { width: 70px; height: 70px; margin-bottom: 12px; }
-        .splash-text { font-size: 34px; font-weight: 800; color: white; animation: fadeInUp 0.5s ease-out 0.2s both; }
-        .splash-sub { font-size: 11px; color: white; margin-top: 8px; opacity: 0.9; animation: fadeInUp 0.5s ease-out 0.4s both; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .splash-text { font-size: 34px; font-weight: 800; color: white; }
+        .splash-sub { font-size: 11px; color: white; margin-top: 8px; opacity: 0.9; }
 
         /* LOGIN SCREEN */
         .login-screen {
@@ -64,7 +68,6 @@
             max-width: 280px;
             text-align: center;
             box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-            z-index: 1510;
         }
         .login-card h2 { color: var(--blue-soft); margin-bottom: 6px; font-size: 24px; }
         .login-card p { color: var(--text-soft); font-size: 11px; margin-bottom: 18px; }
@@ -73,15 +76,12 @@
             border-radius: 50px; font-size: 14px; margin-bottom: 16px;
             text-align: center; background: var(--cream); font-weight: 500;
         }
-        .login-input:focus { outline: none; border-color: var(--mint); }
         .login-btn {
             background: linear-gradient(145deg, var(--mint), var(--mint-dark));
             color: white; border: none; padding: 12px 0; width: 100%;
             border-radius: 50px; font-weight: 700; font-size: 15px;
-            cursor: pointer; box-shadow: 0 4px 0 #5EA88D;
-            transition: 0.07s linear;
+            cursor: pointer;
         }
-        .login-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #5EA88D; }
 
         .app-container { display: none; }
 
@@ -95,7 +95,7 @@
         .logo svg { width: 36px; height: 36px; }
         .logo-text { font-size: 20px; font-weight: 800; color: white; }
         .logo-tagline { font-size: 8px; color: white; margin-top: 2px; opacity: 0.9; }
-        .welcome-text { color: white; font-size: 10px; margin-top: 2px; opacity: 0.9; }
+        .welcome-text { color: white; font-size: 10px; margin-top: 2px; }
         .date-badge {
             background: rgba(255,255,255,0.3);
             padding: 4px 10px; border-radius: 25px; font-size: 10px;
@@ -105,7 +105,7 @@
         .tab-container { padding: 0 12px; margin-top: -12px; }
         .tab-bar {
             background: white; border-radius: 50px; display: flex;
-            padding: 4px; box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            padding: 4px;
         }
         .tab {
             flex: 1; padding: 8px 0; border: none; background: transparent;
@@ -119,41 +119,39 @@
 
         .card {
             background: var(--white); border-radius: 24px; padding: 12px 14px;
-            margin-bottom: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.04);
-            border: 1px solid rgba(169,214,229,0.3);
+            margin-bottom: 12px;
         }
         .target-card { background: linear-gradient(145deg, var(--cream), #FFF9F5); border: 1.5px solid var(--peach); }
-        .target-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--peach-dark); margin-bottom: 6px; }
+        .target-label { font-size: 9px; font-weight: 700; margin-bottom: 6px; color: var(--peach-dark); }
         .target-control { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
         .target-input {
             background: white; border: 1.5px solid var(--peach); padding: 6px 10px;
             border-radius: 24px; font-size: 18px; font-weight: 800; width: 75px;
-            text-align: center; color: var(--text-dark);
+            text-align: center;
         }
         .btn-save {
             background: linear-gradient(145deg, var(--lavender), #BFA5E0); color: white;
             border: none; padding: 6px 14px; border-radius: 30px; font-weight: 700;
-            font-size: 11px; cursor: pointer; box-shadow: 0 3px 0 #9E87C2;
+            font-size: 11px; cursor: pointer;
         }
-        .btn-save:active { transform: translateY(2px); box-shadow: 0 1px 0 #9E87C2; }
 
         .stats-center { text-align: center; padding: 4px 0 2px; }
         .big-number {
-            font-size: 44px; font-weight: 800;
+            font-size: 40px; font-weight: 800;
             background: linear-gradient(145deg, var(--blue-soft), var(--mint));
             -webkit-background-clip: text; background-clip: text; color: transparent;
         }
         .big-label { font-size: 10px; font-weight: 600; color: var(--text-soft); margin-top: 4px; }
         .divider {
-            width: 45px; height: 2px;
+            width: 40px; height: 2px;
             background: linear-gradient(90deg, var(--mint), var(--peach), var(--lavender));
-            margin: 8px auto; border-radius: 2px;
+            margin: 6px auto;
         }
 
         .progress-section { margin: 10px 0 4px; }
         .progress-header { display: flex; justify-content: space-between; font-size: 10px; font-weight: 600; margin-bottom: 5px; color: var(--text-soft); }
         .progress-bg { background: #F0E8DC; border-radius: 20px; height: 8px; overflow: hidden; }
-        .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, var(--mint), var(--blue-soft)); border-radius: 20px; transition: width 0.3s ease; }
+        .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, var(--mint), var(--blue-soft)); border-radius: 20px; }
 
         .water-options { margin: 10px 0 8px; }
         .options-title {
@@ -163,34 +161,29 @@
         .options-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
         .water-opt {
             background: linear-gradient(145deg, #E8F4FF, #DCEEFA); border: none;
-            padding: 8px 12px; border-radius: 50px; font-weight: 700; font-size: 12px;
-            color: var(--blue-soft); cursor: pointer; box-shadow: 0 3px 0 #B8D4E8;
-            min-width: 70px;
+            padding: 8px 16px; border-radius: 50px; font-weight: 700; font-size: 12px;
+            color: var(--blue-soft); cursor: pointer; min-width: 70px;
         }
-        .water-opt:active { transform: translateY(2px); box-shadow: 0 1px 0 #B8D4E8; }
 
         .bab-btn {
             width: 100%; background: linear-gradient(145deg, var(--peach), var(--peach-dark));
-            border: none; padding: 11px; border-radius: 50px;
+            border: none; padding: 10px; border-radius: 50px;
             display: flex; align-items: center; justify-content: center; gap: 8px;
-            font-weight: 800; font-size: 14px; color: white; cursor: pointer;
-            margin-top: 6px; box-shadow: 0 4px 0 #D4946A;
+            font-weight: 700; font-size: 14px; color: white; cursor: pointer;
+            margin-top: 6px;
         }
-        .bab-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #D4946A; }
-        .bab-btn svg { width: 18px; height: 18px; }
 
         .reset-row { display: flex; gap: 10px; margin-top: 10px; margin-bottom: 10px; }
         .reset-air {
             flex: 1; background: linear-gradient(145deg, var(--mint), var(--mint-dark));
             color: white; border: none; padding: 8px 0; border-radius: 40px;
-            font-weight: 700; font-size: 11px; cursor: pointer; box-shadow: 0 3px 0 #5EA88D;
+            font-weight: 700; font-size: 11px; cursor: pointer;
         }
         .reset-bab {
             flex: 1; background: linear-gradient(145deg, var(--peach), var(--peach-dark));
             color: white; border: none; padding: 8px 0; border-radius: 40px;
-            font-weight: 700; font-size: 11px; cursor: pointer; box-shadow: 0 3px 0 #D4946A;
+            font-weight: 700; font-size: 11px; cursor: pointer;
         }
-        .reset-air:active, .reset-bab:active { transform: translateY(2px); box-shadow: 0 1px 0 #5EA88D; }
 
         .stats-row { display: flex; gap: 10px; }
         .stat-card {
@@ -200,7 +193,6 @@
         }
         .stat-value { font-size: 20px; font-weight: 800; color: var(--blue-soft); margin-top: 2px; }
         .stat-label-small { font-size: 9px; color: var(--text-soft); font-weight: 600; }
-        .stat-card small { font-size: 8px; color: var(--text-soft); }
 
         .history-item {
             background: white; border-radius: 18px; padding: 10px 14px; margin-bottom: 8px;
@@ -208,38 +200,16 @@
             border-left: 5px solid var(--mint); font-size: 12px;
         }
 
-        .congrats-overlay {
-            position: fixed; inset: 0; background: rgba(169,214,229,0.85);
-            backdrop-filter: blur(6px); display: flex; align-items: center;
-            justify-content: center; z-index: 1000;
+        .profile-input {
+            width: 100%; padding: 10px 14px; border: 1.5px solid var(--blue-pastel);
+            border-radius: 50px; font-size: 13px; background: var(--cream); margin-top: 8px;
         }
-        .congrats-card {
-            background: white; border-radius: 50px; padding: 20px 24px;
-            text-align: center; border-top: 8px solid var(--mint);
+        .logout-btn {
+            margin-top: 10px; background: linear-gradient(145deg, var(--peach), var(--peach-dark));
+            color: white; border: none; padding: 10px; border-radius: 50px;
+            width: 100%; cursor: pointer; font-weight: 700; font-size: 13px;
         }
-        .congrats-card div:first-child { font-size: 40px; }
-        .congrats-card h2 { font-size: 18px; margin: 8px 0; color: var(--text-dark); }
-        .congrats-card button {
-            margin-top: 12px; background: linear-gradient(145deg, var(--mint), var(--mint-dark));
-            color: white; border: none; padding: 8px 24px; border-radius: 50px;
-            font-weight: 700; cursor: pointer;
-        }
-
-        .splash-water {
-            position: fixed; pointer-events: none; width: 8px; height: 8px;
-            border-radius: 50%; background: var(--mint);
-            animation: splashFly 0.5s ease-out forwards; z-index: 1100;
-        }
-        .splash-bab {
-            position: fixed; pointer-events: none; width: 8px; height: 8px;
-            border-radius: 50%; background: var(--peach-dark);
-            animation: splashFly 0.5s ease-out forwards; z-index: 1100;
-        }
-        @keyframes splashFly {
-            0% { opacity: 0.8; transform: scale(0.3); }
-            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2); }
-        }
-
+        
         .confetti {
             position: fixed;
             pointer-events: none;
@@ -252,18 +222,32 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
             100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
-
-        .profile-input {
-            width: 100%; padding: 10px 14px; border: 1.5px solid var(--blue-pastel);
-            border-radius: 50px; font-size: 13px; background: var(--cream); margin-top: 8px;
+        
+        .splash-water, .splash-bab {
+            position: fixed;
+            pointer-events: none;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: splashFly 0.5s ease-out forwards;
+            z-index: 1100;
         }
-        .logout-btn {
-            margin-top: 10px; background: linear-gradient(145deg, var(--peach), var(--peach-dark));
-            color: white; border: none; padding: 10px; border-radius: 50px;
-            width: 100%; cursor: pointer; font-weight: 700; font-size: 13px;
-            box-shadow: 0 3px 0 #D4946A;
+        .splash-water { background: var(--mint); }
+        .splash-bab { background: var(--peach-dark); }
+        @keyframes splashFly {
+            0% { opacity: 0.8; transform: scale(0.3); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2); }
         }
-        .logout-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #D4946A; }
+        
+        .congrats-overlay {
+            position: fixed; inset: 0; background: rgba(169,214,229,0.85);
+            backdrop-filter: blur(6px); display: flex; align-items: center;
+            justify-content: center; z-index: 1000;
+        }
+        .congrats-card {
+            background: white; border-radius: 50px; padding: 20px 24px;
+            text-align: center; border-top: 8px solid var(--mint);
+        }
     </style>
 </head>
 <body>
@@ -291,7 +275,7 @@
     <div class="login-card">
         <h2>🌸 Selamat Datang!</h2>
         <p>Masuk panggilan namamu dulu yuk</p>
-        <input type="text" id="loginName" placeholder="Nama panggilan" class="login-input" autocomplete="off">
+        <input type="text" id="loginName" placeholder="Nama panggilan" class="login-input">
         <button id="loginBtn" class="login-btn">Mulai</button>
     </div>
 </div>
@@ -365,7 +349,7 @@
         </div>
 
         <button id="babBtn" class="bab-btn">
-            <svg viewBox="0 0 32 32" fill="none">
+            <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
                 <ellipse cx="16" cy="20" rx="7" ry="9" fill="#FFDAB9" stroke="#FFFFFF" stroke-width="1.5"/>
                 <circle cx="12.5" cy="17" r="1.5" fill="#FFC4A0"/>
                 <circle cx="19.5" cy="17" r="1.5" fill="#FFC4A0"/>
@@ -419,318 +403,72 @@
     let historyLogs = [];
     let todayStr = "";
 
-    // ========== HELPER FUNCTIONS ==========
-    function getToday() {
-        return new Date().toISOString().slice(0, 10);
-    }
+    function getToday() { return new Date().toISOString().slice(0, 10); }
+    function formatDateDisplay() { const d=new Date(); return `${d.getDate()} ${['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'][d.getMonth()]} ${d.getFullYear()}`; }
 
-    function formatDateDisplay() {
-        const d = new Date();
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-        return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-    }
-
-    // ========== SAVE & LOAD ==========
-    function saveUserData() {
-        if (!currentUser) return;
-        const data = { totalWater, totalBab, totalWaterAll, totalBabAll, target, historyLogs, todayStr };
-        localStorage.setItem(`pooter_${currentUser}`, JSON.stringify(data));
-    }
-
+    function saveUserData() { if (!currentUser) return; localStorage.setItem(`pooter_${currentUser}`, JSON.stringify({ totalWater, totalBab, totalWaterAll, totalBabAll, target, historyLogs, todayStr })); }
     function loadUserData() {
         if (!currentUser) return;
         const saved = localStorage.getItem(`pooter_${currentUser}`);
-        if (saved) {
-            const data = JSON.parse(saved);
-            totalWater = data.totalWater || 0;
-            totalBab = data.totalBab || 0;
-            totalWaterAll = data.totalWaterAll || 0;
-            totalBabAll = data.totalBabAll || 0;
-            target = data.target || 2.0;
-            historyLogs = data.historyLogs || [];
-            todayStr = data.todayStr || getToday();
-        } else {
-            totalWater = 0; totalBab = 0; totalWaterAll = 0; totalBabAll = 0;
-            target = 2.0; historyLogs = []; todayStr = getToday();
-        }
+        if (saved) { const data = JSON.parse(saved); totalWater = data.totalWater || 0; totalBab = data.totalBab || 0; totalWaterAll = data.totalWaterAll || 0; totalBabAll = data.totalBabAll || 0; target = data.target || 2.0; historyLogs = data.historyLogs || []; todayStr = data.todayStr || getToday(); }
+        else { totalWater = 0; totalBab = 0; totalWaterAll = 0; totalBabAll = 0; target = 2.0; historyLogs = []; todayStr = getToday(); }
         checkDailyReset();
         renderUI();
     }
 
-    // ========== RESET HARIAN OTOMATIS ==========
-    function checkDailyReset() {
-        const now = getToday();
-        if (todayStr !== now && (totalWater > 0 || totalBab > 0)) {
-            historyLogs.unshift({ date: todayStr, water: totalWater, bab: totalBab });
-            if (historyLogs.length > 30) historyLogs.pop();
-            totalWater = 0;
-            totalBab = 0;
-            todayStr = now;
-            saveUserData();
-        }
-    }
+    function checkDailyReset() { const now = getToday(); if (todayStr !== now && (totalWater > 0 || totalBab > 0)) { historyLogs.unshift({ date: todayStr, water: totalWater, bab: totalBab }); if (historyLogs.length > 30) historyLogs.pop(); totalWater = 0; totalBab = 0; todayStr = now; saveUserData(); } }
 
-    // ========== RENDER UI ==========
     function renderUI() {
-        const totalWaterCenter = document.getElementById('totalWaterCenter');
-        const totalBabCenter = document.getElementById('totalBabCenter');
-        const totalWaterStat = document.getElementById('totalWaterStat');
-        const totalBabStat = document.getElementById('totalBabStat');
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const targetInput = document.getElementById('targetInput');
-        const dateDisplay = document.getElementById('dateDisplay');
-        const welcomeUser = document.getElementById('welcomeUser');
-        const profileName = document.getElementById('profileName');
-        const historyList = document.getElementById('historyList');
-
-        if (totalWaterCenter) totalWaterCenter.innerText = totalWater.toFixed(1);
-        if (totalBabCenter) totalBabCenter.innerText = totalBab;
-        if (totalWaterStat) totalWaterStat.innerText = totalWaterAll.toFixed(1);
-        if (totalBabStat) totalBabStat.innerText = totalBabAll;
-        
+        const el = (id) => document.getElementById(id);
+        if (el('totalWaterCenter')) el('totalWaterCenter').innerText = totalWater.toFixed(1);
+        if (el('totalBabCenter')) el('totalBabCenter').innerText = totalBab;
+        if (el('totalWaterStat')) el('totalWaterStat').innerText = totalWaterAll.toFixed(1);
+        if (el('totalBabStat')) el('totalBabStat').innerText = totalBabAll;
         const percent = Math.min(100, (totalWater / target) * 100);
-        if (progressFill) progressFill.style.width = percent + '%';
-        if (progressText) progressText.innerText = `${totalWater.toFixed(1)} / ${target} L`;
-        if (targetInput) targetInput.value = target;
-        if (dateDisplay) dateDisplay.innerText = formatDateDisplay();
-        if (welcomeUser && currentUser) welcomeUser.innerHTML = `✨ Hai, ${currentUser} ✨`;
-        if (profileName) profileName.value = currentUser || "";
-        
-        if (historyList) {
-            if (historyLogs.length === 0) {
-                historyList.innerHTML = '<div style="text-align:center; padding:16px; color:var(--text-soft);">✨ Belum ada riwayat ✨</div>';
-            } else {
-                historyList.innerHTML = historyLogs.map(h => `<div class="history-item"><strong>📆 ${h.date}</strong><span>💧 ${h.water} L &nbsp; 💩 ${h.bab}x</span></div>`).join('');
-            }
-        }
+        if (el('progressFill')) el('progressFill').style.width = percent + '%';
+        if (el('progressText')) el('progressText').innerText = `${totalWater.toFixed(1)} / ${target} L`;
+        if (el('targetInput')) el('targetInput').value = target;
+        if (el('dateDisplay')) el('dateDisplay').innerText = formatDateDisplay();
+        if (el('welcomeUser') && currentUser) el('welcomeUser').innerHTML = `✨ Hai, ${currentUser} ✨`;
+        if (el('profileName')) el('profileName').value = currentUser || "";
+        const historyDiv = el('historyList');
+        if (historyDiv) { if (historyLogs.length === 0) historyDiv.innerHTML = '<div style="text-align:center; padding:16px; color:var(--text-soft);">✨ Belum ada riwayat ✨</div>'; else historyDiv.innerHTML = historyLogs.map(h => `<div class="history-item"><strong>📆 ${h.date}</strong><span>💧 ${h.water} L &nbsp; 💩 ${h.bab}x</span></div>`).join(''); }
     }
 
-    // ========== ANIMASI ==========
-    function createSplashWater(x, y) {
-        for (let i = 0; i < 10; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'splash-water';
-            dot.style.left = (x + (Math.random() - 0.5) * 40) + 'px';
-            dot.style.top = (y + (Math.random() - 0.5) * 30) + 'px';
-            const dx = (Math.random() - 0.5) * 80;
-            const dy = -Math.random() * 70 - 25;
-            dot.style.setProperty('--dx', dx + 'px');
-            dot.style.setProperty('--dy', dy + 'px');
-            document.body.appendChild(dot);
-            setTimeout(() => dot.remove(), 500);
-        }
-    }
+    // Animasi
+    function createSplashWater(x, y) { for (let i=0;i<10;i++) { const dot = document.createElement('div'); dot.className = 'splash-water'; dot.style.left = (x + (Math.random() - 0.5) * 40) + 'px'; dot.style.top = (y + (Math.random() - 0.5) * 30) + 'px'; const dx = (Math.random() - 0.5) * 80; const dy = -Math.random() * 70 - 25; dot.style.setProperty('--dx', dx + 'px'); dot.style.setProperty('--dy', dy + 'px'); document.body.appendChild(dot); setTimeout(() => dot.remove(), 500); } }
+    function createSplashBab(x, y) { for (let i=0;i<10;i++) { const dot = document.createElement('div'); dot.className = 'splash-bab'; dot.style.left = (x + (Math.random() - 0.5) * 40) + 'px'; dot.style.top = (y + (Math.random() - 0.5) * 30) + 'px'; const dx = (Math.random() - 0.5) * 80; const dy = -Math.random() * 70 - 25; dot.style.setProperty('--dx', dx + 'px'); dot.style.setProperty('--dy', dy + 'px'); document.body.appendChild(dot); setTimeout(() => dot.remove(), 500); } }
+    function triggerConfetti() { const colors = ['#A9D6E5', '#A8E6CF', '#FFDAB9', '#D4C1EC', '#FBC8D9', '#89C4D9', '#7ECFB5']; const icons = ['💧', '🌸', '✨', '⭐', '💖', '🍃', '🦋', '💙', '💚']; for (let i=0;i<60;i++) { const conf = document.createElement('div'); conf.className = 'confetti'; if (Math.random() > 0.3) conf.textContent = icons[Math.floor(Math.random() * icons.length)]; else conf.textContent = ['•', '○', '◇', '▪'][Math.floor(Math.random() * 4)]; conf.style.left = Math.random() * window.innerWidth + 'px'; conf.style.fontSize = (Math.random() * 8 + 8) + 'px'; conf.style.color = colors[Math.floor(Math.random() * colors.length)]; conf.style.opacity = Math.random() * 0.6 + 0.3; conf.style.animationDelay = Math.random() * 0.5 + 's'; document.body.appendChild(conf); setTimeout(() => conf.remove(), 2000); } }
+    function showCongrats() { const modal = document.createElement('div'); modal.className = 'congrats-overlay'; modal.innerHTML = `<div class="congrats-card"><div>🎉🌸🏆🌸🎉</div><h2>Selamat ${currentUser}!</h2><p>Target ${target} liter hari ini tercapai!</p><button id="closeC" style="margin-top:12px; background:var(--mint); border:none; padding:8px 24px; border-radius:50px; cursor:pointer;">💖 OK 💖</button></div>`; document.body.appendChild(modal); document.getElementById('closeC').onclick = () => modal.remove(); }
 
-    function createSplashBab(x, y) {
-        for (let i = 0; i < 10; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'splash-bab';
-            dot.style.left = (x + (Math.random() - 0.5) * 40) + 'px';
-            dot.style.top = (y + (Math.random() - 0.5) * 30) + 'px';
-            const dx = (Math.random() - 0.5) * 80;
-            const dy = -Math.random() * 70 - 25;
-            dot.style.setProperty('--dx', dx + 'px');
-            dot.style.setProperty('--dy', dy + 'px');
-            document.body.appendChild(dot);
-            setTimeout(() => dot.remove(), 500);
-        }
-    }
+    function addWater(amount) { const oldLiterInt = Math.floor(totalWater); const oldProgress = totalWater / target; totalWater += amount; totalWaterAll += amount; const newLiterInt = Math.floor(totalWater); if (newLiterInt > oldLiterInt && newLiterInt > 0) triggerConfetti(); if (oldProgress < 1 && totalWater / target >= 1) showCongrats(); saveUserData(); renderUI(); }
+    function addBab() { totalBab++; totalBabAll++; saveUserData(); renderUI(); }
+    function resetAirOnly() { if (confirm("🌸 Reset catatan AIR hari ini?")) { totalWater = 0; saveUserData(); renderUI(); } }
+    function resetBabOnly() { if (confirm("💩 Reset catatan BAB hari ini?")) { totalBab = 0; saveUserData(); renderUI(); } }
 
-    function triggerConfetti() {
-        const colors = ['#A9D6E5', '#A8E6CF', '#FFDAB9', '#D4C1EC', '#FBC8D9', '#89C4D9', '#7ECFB5'];
-        const icons = ['💧', '🌸', '✨', '⭐', '💖', '🍃', '🦋', '💙', '💚'];
-        
-        for (let i = 0; i < 60; i++) {
-            const conf = document.createElement('div');
-            conf.className = 'confetti';
-            if (Math.random() > 0.3) {
-                conf.textContent = icons[Math.floor(Math.random() * icons.length)];
-            } else {
-                conf.textContent = ['•', '○', '◇', '▪'][Math.floor(Math.random() * 4)];
-            }
-            conf.style.left = Math.random() * window.innerWidth + 'px';
-            conf.style.fontSize = (Math.random() * 8 + 8) + 'px';
-            conf.style.color = colors[Math.floor(Math.random() * colors.length)];
-            conf.style.opacity = Math.random() * 0.6 + 0.3;
-            conf.style.animationDelay = Math.random() * 0.5 + 's';
-            document.body.appendChild(conf);
-            setTimeout(() => conf.remove(), 2000);
-        }
-    }
+    // LOGIN
+    function login() { const inputName = document.getElementById('loginName'); let name = inputName.value.trim(); if (name === "") name = "Pejuang Sehat"; currentUser = name; localStorage.setItem('pooter_currentUser', currentUser); document.getElementById('loginScreen').style.display = 'none'; document.getElementById('appContainer').style.display = 'block'; loadUserData(); }
+    function logout() { saveUserData(); currentUser = null; localStorage.removeItem('pooter_currentUser'); document.getElementById('appContainer').style.display = 'none'; document.getElementById('loginScreen').style.display = 'flex'; document.getElementById('loginName').value = ''; }
 
-    function showCongrats() {
-        const modal = document.createElement('div');
-        modal.className = 'congrats-overlay';
-        modal.innerHTML = `<div class="congrats-card"><div>🎉🌸🏆🌸🎉</div><h2>Selamat ${currentUser}!</h2><p>Target ${target} liter hari ini tercapai!</p><button id="closeC">💖 OK 💖</button></div>`;
-        document.body.appendChild(modal);
-        document.getElementById('closeC').onclick = () => modal.remove();
-    }
+    // ========== SETUP ==========
+    document.getElementById('loginBtn').onclick = login;
+    document.getElementById('loginName').onkeypress = function(e) { if (e.key === 'Enter') login(); };
+    document.getElementById('logoutBtn').onclick = logout;
+    document.getElementById('saveProfileBtn').onclick = function() { const newName = document.getElementById('profileName').value.trim(); if (newName) { localStorage.removeItem(`pooter_${currentUser}`); currentUser = newName; localStorage.setItem('pooter_currentUser', currentUser); saveUserData(); renderUI(); } };
+    document.getElementById('saveTargetBtn').onclick = function() { let v = parseFloat(document.getElementById('targetInput').value); if (isNaN(v) || v <= 0) v = 2.0; target = v; saveUserData(); renderUI(); };
+    document.getElementById('resetAirBtn').onclick = resetAirOnly;
+    document.getElementById('resetBabBtn').onclick = resetBabOnly;
+    document.getElementById('babBtn').onclick = function(e) { const rect = document.getElementById('babBtn').getBoundingClientRect(); createSplashBab(rect.left + rect.width / 2, rect.top + rect.height / 2); addBab(); };
+    document.querySelectorAll('.water-opt').forEach(btn => { btn.onclick = function(e) { const rect = btn.getBoundingClientRect(); createSplashWater(rect.left + rect.width / 2, rect.top + rect.height / 2); addWater(parseFloat(btn.dataset.water)); }; });
+    document.querySelectorAll('.tab').forEach(tab => { tab.onclick = function() { document.querySelectorAll('.content-pane').forEach(p => p.classList.remove('active')); document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); document.getElementById(tab.dataset.tab).classList.add('active'); tab.classList.add('active'); if (tab.dataset.tab === 'history') renderUI(); }; });
+    setInterval(() => { if (currentUser) { checkDailyReset(); renderUI(); saveUserData(); } }, 60000);
 
-    // ========== CORE FUNCTIONS ==========
-    function addWater(amount) {
-        const oldLiterInt = Math.floor(totalWater);
-        const oldProgress = totalWater / target;
-        totalWater += amount;
-        totalWaterAll += amount;
-        const newLiterInt = Math.floor(totalWater);
-        if (newLiterInt > oldLiterInt && newLiterInt > 0) triggerConfetti();
-        if (oldProgress < 1 && totalWater / target >= 1) showCongrats();
-        saveUserData();
-        renderUI();
-    }
-
-    function addBab() { 
-        totalBab++; 
-        totalBabAll++; 
-        saveUserData(); 
-        renderUI(); 
-    }
-
-    function resetAirOnly() { 
-        if (confirm("🌸 Reset catatan AIR hari ini?")) { 
-            totalWater = 0; 
-            saveUserData(); 
-            renderUI(); 
-        } 
-    }
-
-    function resetBabOnly() { 
-        if (confirm("💩 Reset catatan BAB hari ini?")) { 
-            totalBab = 0; 
-            saveUserData(); 
-            renderUI(); 
-        } 
-    }
-
-    // ========== LOGIN & LOGOUT ==========
-    function login() {
-        const inputName = document.getElementById('loginName');
-        let name = inputName.value.trim();
-        if (name === "") name = "Pejuang Sehat";
-        currentUser = name;
-        localStorage.setItem('pooter_currentUser', currentUser);
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('appContainer').style.display = 'block';
-        loadUserData();
-    }
-
-    function logout() {
-        saveUserData();
-        currentUser = null;
-        localStorage.removeItem('pooter_currentUser');
-        document.getElementById('appContainer').style.display = 'none';
-        document.getElementById('loginScreen').style.display = 'flex';
-        document.getElementById('loginName').value = '';
-    }
-
-    // ========== EVENT LISTENERS ==========
-    document.addEventListener('DOMContentLoaded', function() {
-        // Login button
-        const loginBtn = document.getElementById('loginBtn');
-        const loginNameInput = document.getElementById('loginName');
-        
-        if (loginBtn) {
-            loginBtn.addEventListener('click', login);
-        }
-        if (loginNameInput) {
-            loginNameInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') login();
-            });
-        }
-        
-        // Logout
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (logoutBtn) logoutBtn.addEventListener('click', logout);
-        
-        // Save profile
-        const saveProfileBtn = document.getElementById('saveProfileBtn');
-        if (saveProfileBtn) {
-            saveProfileBtn.addEventListener('click', function() {
-                const newName = document.getElementById('profileName').value.trim();
-                if (newName) {
-                    localStorage.removeItem(`pooter_${currentUser}`);
-                    currentUser = newName;
-                    localStorage.setItem('pooter_currentUser', currentUser);
-                    saveUserData();
-                    renderUI();
-                }
-            });
-        }
-        
-        // Water options
-        document.querySelectorAll('.water-opt').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const rect = btn.getBoundingClientRect();
-                createSplashWater(rect.left + rect.width / 2, rect.top + rect.height / 2);
-                addWater(parseFloat(btn.dataset.water));
-            });
-        });
-        
-        // BAB button
-        const babBtn = document.getElementById('babBtn');
-        if (babBtn) {
-            babBtn.addEventListener('click', function(e) {
-                const rect = babBtn.getBoundingClientRect();
-                createSplashBab(rect.left + rect.width / 2, rect.top + rect.height / 2);
-                addBab();
-            });
-        }
-        
-        // Reset buttons
-        const resetAirBtn = document.getElementById('resetAirBtn');
-        const resetBabBtn = document.getElementById('resetBabBtn');
-        if (resetAirBtn) resetAirBtn.addEventListener('click', resetAirOnly);
-        if (resetBabBtn) resetBabBtn.addEventListener('click', resetBabOnly);
-        
-        // Save target
-        const saveTargetBtn = document.getElementById('saveTargetBtn');
-        if (saveTargetBtn) {
-            saveTargetBtn.addEventListener('click', function() {
-                let v = parseFloat(document.getElementById('targetInput').value);
-                if (isNaN(v) || v <= 0) v = 2.0;
-                target = v;
-                saveUserData();
-                renderUI();
-            });
-        }
-        
-        // Tabs
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                const targetId = tab.dataset.tab;
-                document.querySelectorAll('.content-pane').forEach(p => p.classList.remove('active'));
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.getElementById(targetId).classList.add('active');
-                tab.classList.add('active');
-                if (targetId === 'history') renderUI();
-            });
-        });
-    });
-
-    // ========== AUTO RESET EVERY MINUTE ==========
-    setInterval(() => { 
-        if (currentUser) { 
-            checkDailyReset(); 
-            renderUI(); 
-            saveUserData(); 
-        } 
-    }, 60000);
-
-    // ========== INITIALIZATION ==========
+    // INIT
     const savedUser = localStorage.getItem('pooter_currentUser');
     setTimeout(() => {
-        const splash = document.getElementById('splashScreen');
-        if (splash) splash.style.display = 'none';
-        
-        if (savedUser) {
-            currentUser = savedUser;
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('appContainer').style.display = 'block';
-            loadUserData();
-        } else {
-            document.getElementById('loginScreen').style.display = 'flex';
-        }
+        document.getElementById('splashScreen').style.display = 'none';
+        if (savedUser) { currentUser = savedUser; document.getElementById('loginScreen').style.display = 'none'; document.getElementById('appContainer').style.display = 'block'; loadUserData(); }
+        else { document.getElementById('loginScreen').style.display = 'flex'; }
     }, 1600);
 </script>
 </body>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#A9D6E5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="POOTER">
+    <link rel="manifest" href="manifest.json">
+    <title>POOTER - your daily wellness buddy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(145deg, #E8F8FF 0%, #FFE8F0 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+        :root {
+            --blue-pastel: #A9D6E5;
+            --blue-soft: #89C4D9;
+            --mint: #A8E6CF;
+            --mint-dark: #7ECFB5;
+            --peach: #FFDAB9;
+            --peach-dark: #FFC4A0;
+            --lavender: #D4C1EC;
+            --white: #FFFFFF;
+            --cream: #FFFDF8;
+            --text-dark: #4A5568;
+            --text-soft: #7A8AA6;
+        }
+
+        /* SPLASH SCREEN */
+        .splash-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(145deg, var(--blue-pastel), #FBC8D9);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 2000;
+            animation: fadeOut 0.8s ease-in-out 1.5s forwards;
+        }
+        @keyframes fadeOut { 0% { opacity: 1; visibility: visible; } 100% { opacity: 0; visibility: hidden; } }
+        .splash-logo { animation: bounceScale 0.6s ease-out; }
+        @keyframes bounceScale { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+        .splash-logo svg { width: 70px; height: 70px; margin-bottom: 12px; }
+        .splash-text { font-size: 34px; font-weight: 800; color: white; animation: fadeInUp 0.5s ease-out 0.2s both; }
+        .splash-sub { font-size: 11px; color: white; margin-top: 8px; opacity: 0.9; animation: fadeInUp 0.5s ease-out 0.4s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* LOGIN SCREEN */
+        .login-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(145deg, var(--blue-pastel), #FBC8D9);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1500;
+        }
+        .login-card {
+            background: var(--white);
+            border-radius: 40px;
+            padding: 28px 24px;
+            width: 85%;
+            max-width: 280px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+        .login-card h2 { color: var(--blue-soft); margin-bottom: 6px; font-size: 24px; }
+        .login-card p { color: var(--text-soft); font-size: 11px; margin-bottom: 18px; }
+        .login-input {
+            width: 100%; padding: 12px 16px; border: 2px solid var(--blue-pastel);
+            border-radius: 50px; font-size: 14px; margin-bottom: 16px;
+            text-align: center; background: var(--cream); font-weight: 500;
+        }
+        .login-input:focus { outline: none; border-color: var(--mint); }
+        .login-btn {
+            background: linear-gradient(145deg, var(--mint), var(--mint-dark));
+            color: white; border: none; padding: 12px 0; width: 100%;
+            border-radius: 50px; font-weight: 700; font-size: 15px;
+            cursor: pointer; box-shadow: 0 4px 0 #5EA88D;
+        }
+        .login-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #5EA88D; }
+
+        .app-container { display: none; }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(145deg, var(--blue-pastel), var(--blue-soft));
+            padding: 12px 16px 10px 16px;
+            border-radius: 0 0 28px 28px;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo svg { width: 36px; height: 36px; }
+        .logo-text { font-size: 20px; font-weight: 800; color: white; }
+        .logo-tagline { font-size: 8px; color: white; margin-top: 2px; opacity: 0.9; }
+        .welcome-text { color: white; font-size: 10px; margin-top: 2px; opacity: 0.9; }
+        .date-badge {
+            background: rgba(255,255,255,0.3); backdrop-filter: blur(8px);
+            padding: 4px 10px; border-radius: 25px; font-size: 10px;
+            font-weight: 600; color: white; display: inline-block; margin-top: 6px;
+        }
+
+        /* TAB BAR */
+        .tab-container { padding: 0 12px; margin-top: -12px; }
+        .tab-bar {
+            background: white; border-radius: 50px; display: flex;
+            padding: 4px; box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+        .tab {
+            flex: 1; padding: 8px 0; border: none; background: transparent;
+            border-radius: 45px; font-weight: 700; font-size: 12px;
+            cursor: pointer; color: var(--text-soft);
+        }
+        .tab.active { background: linear-gradient(145deg, var(--mint), var(--mint-dark)); color: white; }
+
+        .content-pane { display: none; padding: 12px 12px 16px 12px; }
+        .content-pane.active { display: block; }
+
+        /* CARD */
+        .card {
+            background: var(--white); border-radius: 24px; padding: 12px 14px;
+            margin-bottom: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(169,214,229,0.3);
+        }
+        .target-card { background: linear-gradient(145deg, var(--cream), #FFF9F5); border: 1.5px solid var(--peach); }
+        .target-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--peach-dark); margin-bottom: 6px; }
+        .target-control { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+        .target-input {
+            background: white; border: 1.5px solid var(--peach); padding: 6px 10px;
+            border-radius: 24px; font-size: 18px; font-weight: 800; width: 75px;
+            text-align: center; color: var(--text-dark);
+        }
+        .btn-save {
+            background: linear-gradient(145deg, var(--lavender), #BFA5E0); color: white;
+            border: none; padding: 6px 14px; border-radius: 30px; font-weight: 700;
+            font-size: 11px; cursor: pointer; box-shadow: 0 3px 0 #9E87C2;
+        }
+        .btn-save:active { transform: translateY(2px); box-shadow: 0 1px 0 #9E87C2; }
+
+        .stats-center { text-align: center; padding: 4px 0 2px; }
+        .big-number {
+            font-size: 44px; font-weight: 800;
+            background: linear-gradient(145deg, var(--blue-soft), var(--mint));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .big-label { font-size: 10px; font-weight: 600; color: var(--text-soft); margin-top: 4px; }
+        .divider {
+            width: 45px; height: 2px;
+            background: linear-gradient(90deg, var(--mint), var(--peach), var(--lavender));
+            margin: 8px auto; border-radius: 2px;
+        }
+
+        .progress-section { margin: 10px 0 4px; }
+        .progress-header { display: flex; justify-content: space-between; font-size: 10px; font-weight: 600; margin-bottom: 5px; color: var(--text-soft); }
+        .progress-bg { background: #F0E8DC; border-radius: 20px; height: 8px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, var(--mint), var(--blue-soft)); border-radius: 20px; transition: width 0.3s ease; }
+
+        .water-options { margin: 10px 0 8px; }
+        .options-title {
+            font-size: 10px; font-weight: 700; background: linear-gradient(145deg, var(--mint), #C8F0E0);
+            display: inline-block; padding: 4px 14px; border-radius: 50px; color: #4A8B72; margin-bottom: 10px;
+        }
+        .options-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .water-opt {
+            background: linear-gradient(145deg, #E8F4FF, #DCEEFA); border: none;
+            padding: 8px 12px; border-radius: 50px; font-weight: 700; font-size: 12px;
+            color: var(--blue-soft); cursor: pointer; box-shadow: 0 3px 0 #B8D4E8;
+            min-width: 70px;
+        }
+        .water-opt:active { transform: translateY(2px); box-shadow: 0 1px 0 #B8D4E8; }
+
+        .bab-btn {
+            width: 100%; background: linear-gradient(145deg, var(--peach), var(--peach-dark));
+            border: none; padding: 11px; border-radius: 50px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-weight: 800; font-size: 14px; color: white; cursor: pointer;
+            margin-top: 6px; box-shadow: 0 4px 0 #D4946A;
+        }
+        .bab-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #D4946A; }
+        .bab-btn svg { width: 18px; height: 18px; }
+
+        .reset-row { display: flex; gap: 10px; margin-top: 10px; margin-bottom: 10px; }
+        .reset-air {
+            flex: 1; background: linear-gradient(145deg, var(--mint), var(--mint-dark));
+            color: white; border: none; padding: 8px 0; border-radius: 40px;
+            font-weight: 700; font-size: 11px; cursor: pointer; box-shadow: 0 3px 0 #5EA88D;
+        }
+        .reset-bab {
+            flex: 1; background: linear-gradient(145deg, var(--peach), var(--peach-dark));
+            color: white; border: none; padding: 8px 0; border-radius: 40px;
+            font-weight: 700; font-size: 11px; cursor: pointer; box-shadow: 0 3px 0 #D4946A;
+        }
+        .reset-air:active, .reset-bab:active { transform: translateY(2px); box-shadow: 0 1px 0 #5EA88D; }
+
+        .stats-row { display: flex; gap: 10px; }
+        .stat-card {
+            flex: 1; background: linear-gradient(145deg, #FEF9F5, #FFF5EE);
+            border-radius: 22px; padding: 8px 6px; text-align: center;
+            border: 1px solid var(--peach);
+        }
+        .stat-value { font-size: 20px; font-weight: 800; color: var(--blue-soft); margin-top: 2px; }
+        .stat-label-small { font-size: 9px; color: var(--text-soft); font-weight: 600; }
+        .stat-card small { font-size: 8px; color: var(--text-soft); }
+
+        .history-item {
+            background: white; border-radius: 18px; padding: 10px 14px; margin-bottom: 8px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-left: 5px solid var(--mint); font-size: 12px;
+        }
+
+        .congrats-overlay {
+            position: fixed; inset: 0; background: rgba(169,214,229,0.85);
+            backdrop-filter: blur(6px); display: flex; align-items: center;
+            justify-content: center; z-index: 1000;
+        }
+        .congrats-card {
+            background: white; border-radius: 50px; padding: 20px 24px;
+            text-align: center; border-top: 8px solid var(--mint);
+        }
+        .congrats-card div:first-child { font-size: 40px; }
+        .congrats-card h2 { font-size: 18px; margin: 8px 0; color: var(--text-dark); }
+        .congrats-card button {
+            margin-top: 12px; background: linear-gradient(145deg, var(--mint), var(--mint-dark));
+            color: white; border: none; padding: 8px 24px; border-radius: 50px;
+            font-weight: 700; cursor: pointer;
+        }
+
+        .splash-water {
+            position: fixed; pointer-events: none; width: 8px; height: 8px;
+            border-radius: 50%; background: var(--mint);
+            animation: splashFly 0.5s ease-out forwards; z-index: 1100;
+        }
+        .splash-bab {
+            position: fixed; pointer-events: none; width: 8px; height: 8px;
+            border-radius: 50%; background: var(--peach-dark);
+            animation: splashFly 0.5s ease-out forwards; z-index: 1100;
+        }
+        @keyframes splashFly {
+            0% { opacity: 0.8; transform: scale(0.3); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2); }
+        }
+
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            font-size: 10px;
+            z-index: 999;
+            bottom: -10px;
+            animation: confettiUp 1.8s ease-out forwards;
+        }
+        @keyframes confettiUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .profile-input {
+            width: 100%; padding: 10px 14px; border: 1.5px solid var(--blue-pastel);
+            border-radius: 50px; font-size: 13px; background: var(--cream); margin-top: 8px;
+        }
+        .logout-btn {
+            margin-top: 10px; background: linear-gradient(145deg, var(--peach), var(--peach-dark));
+            color: white; border: none; padding: 10px; border-radius: 50px;
+            width: 100%; cursor: pointer; font-weight: 700; font-size: 13px;
+            box-shadow: 0 3px 0 #D4946A;
+        }
+        .logout-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #D4946A; }
+        
+        /* INSTALL BUTTON */
+        .install-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: var(--white);
+            border-radius: 60px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            z-index: 1200;
+            border: 1px solid var(--mint);
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .install-banner button {
+            background: linear-gradient(145deg, var(--mint), var(--mint-dark));
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .hide-install { display: none; }
+    </style>
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div id="splashScreen" class="splash-screen">
+    <div class="splash-logo">
+        <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="#A8E6CF" stroke="#FFFFFF" stroke-width="2.5"/>
+            <circle cx="22" cy="30" r="7" fill="#FFDAB9"/>
+            <circle cx="42" cy="30" r="7" fill="#FFDAB9"/>
+            <circle cx="20" cy="28" r="2" fill="#FFFFFF"/>
+            <circle cx="24" cy="28" r="2" fill="#FFFFFF"/>
+            <circle cx="40" cy="28" r="2" fill="#FFFFFF"/>
+            <circle cx="44" cy="28" r="2" fill="#FFFFFF"/>
+            <path d="M26 34 Q32 40 38 34" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+    </div>
+    <div class="splash-text">POOTER</div>
+    <div class="splash-sub">your daily wellness buddy</div>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="login-screen">
+    <div class="login-card">
+        <h2>🌸 Selamat Datang!</h2>
+        <p>Masuk panggilan namamu dulu yuk</p>
+        <input type="text" id="loginName" placeholder="Nama panggilan" class="login-input" autocomplete="off">
+        <button id="loginBtn" class="login-btn">Mulai</button>
+    </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="appContainer" class="app-container">
+    <div class="navbar">
+        <div class="logo">
+            <svg viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="#A8E6CF" stroke="#FFFFFF" stroke-width="2"/>
+                <circle cx="16" cy="22" r="5" fill="#FFDAB9"/>
+                <circle cx="32" cy="22" r="5" fill="#FFDAB9"/>
+                <circle cx="14.5" cy="20" r="1.5" fill="#FFFFFF"/>
+                <circle cx="17.5" cy="20" r="1.5" fill="#FFFFFF"/>
+                <circle cx="30.5" cy="20" r="1.5" fill="#FFFFFF"/>
+                <circle cx="33.5" cy="20" r="1.5" fill="#FFFFFF"/>
+                <path d="M20 27 Q24 31 28 27" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <div class="logo-text">POOTER</div>
+                <div class="logo-tagline">your daily wellness buddy</div>
+                <div class="welcome-text" id="welcomeUser"></div>
+            </div>
+        </div>
+        <div class="date-badge" id="dateDisplay"></div>
+    </div>
+
+    <div class="tab-container">
+        <div class="tab-bar">
+            <button class="tab" data-tab="history">📋 Riwayat</button>
+            <button class="tab active" data-tab="home">🏠 Home</button>
+            <button class="tab" data-tab="profile">👤 Akun</button>
+        </div>
+    </div>
+
+    <div id="home" class="content-pane active">
+        <div class="card target-card">
+            <div class="target-label">🎯 TARGET MINUM HARIAN</div>
+            <div class="target-control">
+                <input type="number" id="targetInput" step="0.1" value="2.0" class="target-input">
+                <span style="color:var(--text-soft); font-size:11px;">Liter</span>
+                <button id="saveTargetBtn" class="btn-save">Simpan</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="stats-center">
+                <div class="big-number" id="totalWaterCenter">0.0</div>
+                <div class="big-label">💧 Liter Air Hari Ini</div>
+                <div class="divider"></div>
+                <div class="big-number" id="totalBabCenter">0</div>
+                <div class="big-label">💩 x BAB Hari Ini</div>
+            </div>
+            <div class="progress-section">
+                <div class="progress-header">
+                    <span>✨ Progress ✨</span>
+                    <span id="progressText">0 / 0 L</span>
+                </div>
+                <div class="progress-bg"><div class="progress-fill" id="progressFill"></div></div>
+            </div>
+        </div>
+
+        <div class="water-options">
+            <div class="options-title">💧 TAMBAH AIR</div>
+            <div class="options-grid">
+                <button class="water-opt" data-water="0.1">100ml</button>
+                <button class="water-opt" data-water="0.2">200ml</button>
+                <button class="water-opt" data-water="0.5">500ml</button>
+                <button class="water-opt" data-water="1.0">1000ml</button>
+            </div>
+        </div>
+
+        <button id="babBtn" class="bab-btn">
+            <svg viewBox="0 0 32 32" fill="none">
+                <ellipse cx="16" cy="20" rx="7" ry="9" fill="#FFDAB9" stroke="#FFFFFF" stroke-width="1.5"/>
+                <circle cx="12.5" cy="17" r="1.5" fill="#FFC4A0"/>
+                <circle cx="19.5" cy="17" r="1.5" fill="#FFC4A0"/>
+            </svg>
+            +1x BAB
+        </button>
+
+        <div class="reset-row">
+            <button id="resetAirBtn" class="reset-air">💧 Reset Air</button>
+            <button id="resetBabBtn" class="reset-bab">💩 Reset BAB</button>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label-small">💧 Total Air</div>
+                <div class="stat-value" id="totalWaterStat">0.0</div>
+                <small>Liter</small>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label-small">💩 Total BAB</div>
+                <div class="stat-value" id="totalBabStat">0</div>
+                <small>Kali</small>
+            </div>
+        </div>
+    </div>
+
+    <div 
